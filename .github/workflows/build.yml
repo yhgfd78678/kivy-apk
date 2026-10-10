@@ -1,0 +1,32 @@
+name: Build Kivy APK
+on:
+  workflow_dispatch: # 手动触发打包！在Actions页面点按钮启动
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: 拉取仓库代码
+        uses: actions/checkout@v4
+
+      - name: 安装系统依赖
+        run: |
+          sudo apt update
+          sudo apt install -y git zip unzip openjdk-17-jdk python3-pip python3-virtualenv autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo6 cmake libffi-dev libssl-dev automake autopoint gettext
+          sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+          sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
+
+      - name: 安装Buildozer
+        run: |
+          pip install --upgrade cython==0.29.34 buildozer
+
+      - name: 执行打包
+        run: |
+          buildozer -v android debug
+
+      - name: 上传打包好的APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: 生成的APK文件
+          path: bin/*.apk
+          retention-days: 7
