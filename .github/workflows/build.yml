@@ -21,9 +21,7 @@ jobs:
 
       - name: 执行打包
         run: |
-          export ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
-          export BUILDOZER_ACCEPT_SDK_LICENSE=1
-          buildozer -v android debug
+          yes | buildozer -v android debug
 
       - name: 上传打包好的APK
         uses: actions/upload-artifact@v4
@@ -31,3 +29,4 @@ jobs:
           name: 生成的APK文件
           path: bin/*.apk
           retention-days: 7
+
