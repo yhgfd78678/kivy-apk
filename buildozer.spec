@@ -100,7 +100,7 @@ version = 0.1
 # version.filename = main.py
 
 # (list) Application requirements
-requirements = python3,kivy,pillow,pytesseract,requests,plyer
+requirements = python3,kivy,pillow,requests,plyer
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
