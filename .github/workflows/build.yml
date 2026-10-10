@@ -22,7 +22,7 @@ jobs:
       - name: 执行打包
         run: |
           export ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
+          export BUILDOZER_ACCEPT_SDK_LICENSE=1
           buildozer -v android debug
 
       - name: 上传打包好的APK
